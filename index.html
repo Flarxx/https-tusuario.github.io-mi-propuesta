@@ -57,6 +57,20 @@
       <p id="feedback-message" class="mt-4 text-lg font-semibold h-6 text-center"></p>
     </div>
 
+    <!-- Candado para desbloquear el corazón -->
+<div id="lock-container" class="step text-center opacity-0 hidden p-6">
+  <p class="text-white text-4xl mb-6">🔒 Toca el candado 3 veces para desbloquear tu corazón 💖</p>
+  <button id="lock-btn" class="text-5xl animate-pulse">🔒</button>
+</div>
+
+<!-- Barra de progreso del amor -->
+<div id="love-progress-container" class="step text-center opacity-0 hidden p-6">
+  <p id="love-progress-text" class="text-white text-xl mb-2">0% → Pensándolo…</p>
+  <div class="w-64 h-6 bg-gray-600 rounded-full mx-auto">
+    <div id="love-progress-bar" class="h-6 bg-pink-500 rounded-full w-0 transition-all duration-500"></div>
+  </div>
+</div>
+
     <!-- Propuesta final -->
     <div id="final-proposal" class="step mt-12 text-center opacity-0 hidden p-6">
       <p id="final-emoji" class="text-7xl mb-4 animate-heart-beat">🌸</p>
