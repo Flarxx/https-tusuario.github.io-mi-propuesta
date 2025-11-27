@@ -24,7 +24,7 @@ const questions = [
     { text: "¿estaba pensando hacer algo original pero me pase cierto?", img: "images/7.jpeg" },
     { text: "¿Un tap en claro podria resolver alguno de tus problemas te animas?", img: "images/8.jpeg" },
     { text: "¿Trata respondiendo no  es la unica vez que sera buena idea 😉", img: "images/9.jpeg" },
-    { text: "¿Estás lista/o para la aventura más increíble de tu vida... conmigo?", img: "images/10.jpeg" },
+    { text: "¿si ya llegaste aqui que esperas ?", img: "images/10.jpeg" },
 ];
 
 // Respuestas dinámicas
