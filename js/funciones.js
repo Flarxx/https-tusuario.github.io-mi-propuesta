@@ -219,3 +219,96 @@ window.addEventListener("resize", () => {
     if (left > maxX || top > maxY) moveNoButtonByElement(btn);
   }
 });
+
+
+let noCounter = 0; // contador de intentos “No”
+const maxNoTouches = 5;
+
+const lockContainer = document.getElementById("lock-container");
+const lockBtn = document.getElementById("lock-btn");
+let lockTouches = 0;
+
+const loveProgressContainer = document.getElementById("love-progress-container");
+const loveProgressBar = document.getElementById("love-progress-bar");
+const loveProgressText = document.getElementById("love-progress-text");
+
+// Modificar la función del botón NO
+noButton.addEventListener("click", () => {
+    // Vibración móvil
+    if (navigator.vibrate) navigator.vibrate(100);
+
+    noCounter++;
+    if (noCounter >= maxNoTouches) {
+        feedbackMessage.textContent = "Wow… eres persistente 🤨 pero no tanto como yo 😌";
+        feedbackMessage.className = "mt-4 text-lg font-semibold h-6 text-center text-yellow-300";
+        noCounter = 0; // reset
+    }
+
+    // Mover botón NO
+    moveNoButtonByElement(noButton);
+});
+
+// Mostrar candado antes de final proposal
+function showLockStep() {
+    quizContainer.classList.add("hidden");
+    lockContainer.classList.remove("hidden");
+    lockContainer.classList.add("active", "opacity-100");
+}
+
+// Manejo del candado
+lockBtn.addEventListener("click", () => {
+    lockTouches++;
+    if (lockTouches >= 3) {
+        lockContainer.classList.add("hidden");
+        showLoveProgress();
+    }
+});
+
+// Barra de progreso del amor
+function showLoveProgress() {
+    loveProgressContainer.classList.remove("hidden");
+    loveProgressContainer.classList.add("active", "opacity-100");
+
+    let progress = 0;
+    const messages = [
+        "0% → Pensándolo…",
+        "50% → No puedes resistirte, ¿verdad?",
+        "100% → Sabía que dirías que sí ❤️"
+    ];
+
+    const interval = setInterval(() => {
+        progress += 10;
+        if (progress > 100) {
+            clearInterval(interval);
+            loveProgressContainer.classList.add("hidden");
+            showFinalProposal(); // finalmente mostrar pregunta final
+            return;
+        }
+
+        loveProgressBar.style.width = progress + "%";
+
+        if (progress < 50) loveProgressText.textContent = messages[0];
+        else if (progress < 100) loveProgressText.textContent = messages[1];
+        else loveProgressText.textContent = messages[2];
+    }, 300);
+}
+
+// Modificar loadQuestion para ir a candado al final
+function loadQuestion() {
+    if (currentQuestion < questions.length) {
+        const q = questions[currentQuestion];
+        questionText.textContent = q.text;
+        currentQIndex.textContent = currentQuestion + 1;
+
+        if (q.img) {
+            questionImage.src = q.img;
+            questionImage.classList.remove("hidden");
+        } else {
+            questionImage.classList.add("hidden");
+        }
+
+    } else {
+        // En lugar de ir directo a final, mostramos candado
+        showLockStep();
+    }
+}
