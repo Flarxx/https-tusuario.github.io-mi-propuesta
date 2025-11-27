@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para Tí, Especialmente - La Propuesta</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
+
+  <script src="js/tailwind_config.js"></script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="bg-background-deep font-sans overflow-x-hidden">
+
+  <!-- Botón para iniciar la app y la música -->
+  <button id="start-btn" class="text-white bg-pink-600 px-6 py-3 rounded-full text-xl font-bold mt-10">
+    💖 Toca aquí para comenzar 💖
+  </button>
+
+  <div id="app" class="min-h-screen flex flex-col items-center justify-center p-4 space-y-12">
+
+    <!-- Música de fondo -->
+    <audio id="bg-music" src="audio/musica.mp3" preload="auto" loop></audio>
+
+    <!-- Intro -->
+    <div id="intro-text" class="step text-white text-3xl md:text-5xl font-extrabold max-w-xl text-center space-y-4 opacity-0 animate-fade-in p-6">
+      <p>Hola 💖, quería hacer algo realmente especial para ti...</p>
+      <p>y que mejor que un juego para empezar?<span class="text-primary-pink">¡un juego solo para ti!</span></p>
+    </div>
+
+    <!-- Quiz -->
+    <div id="quiz-container" class="step p-6 md:p-8 rounded-2xl shadow-2xl w-full max-w-md transition-all duration-700 opacity-0 hidden">
+      <p class="text-accent-yellow text-xl font-bold mb-4 text-center">
+        Pregunta <span id="current-q-index">1</span>/10
+      </p>
+
+      <div id="question-image" class="mb-4 flex justify-center">
+        <img src="" alt="Pregunta" class="w-48 h-48 md:w-56 md:h-56 rounded-xl object-cover shadow-lg hidden" />
+      </div>
+
+      <p id="question-text" class="text-white text-2xl md:text-3xl font-semibold mb-8 text-center"></p>
+
+      <div id="quiz-buttons" class="flex flex-col md:flex-row justify-center gap-4">
+        <button onclick="answerQuestion(true)"
+          class="bg-primary-pink hover:bg-secondary-purple text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105 active:scale-95">
+          ¡Claro!
+        </button>
+        <button onclick="answerQuestion(false)"
+          class="bg-gray-400 hover:bg-gray-500 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105 active:scale-95">
+          ¡No!
+        </button>
+      </div>
+
+      <p id="feedback-message" class="mt-4 text-lg font-semibold h-6 text-center"></p>
+    </div>
+
+    <!-- Propuesta final -->
+    <div id="final-proposal" class="step mt-12 text-center opacity-0 hidden p-6">
+      <p id="final-emoji" class="text-7xl mb-4 animate-heart-beat">🌸</p>
+      <p id="final-question"
+        class="text-primary-pink text-5xl md:text-7xl font-handwritten font-extrabold tracking-wide drop-shadow-lg p-4 bg-white/10 rounded-xl">
+        ¿Quieres ser mi novia?
+      </p>
+
+      <div id="final-buttons" class="flex flex-col md:flex-row justify-center space-x-0 md:space-x-8 mt-10 hidden">
+        <button onclick="handleFinalResponse('yes')"
+          class="bg-green-500 hover:bg-green-600 text-white text-2xl font-bold py-4 px-10 rounded-full shadow-xl transition duration-300 transform hover:scale-110 active:scale-100">
+          ¡SÍ, por siempre!
+        </button>
+        <button id="btn-no" onclick="handleFinalResponse('no')"
+          class="bg-red-500/50 hover:bg-red-500 text-white font-bold py-3 px-6 rounded-full shadow-xl transition duration-300 transform hover:scale-105 text-sm mt-4 md:mt-0">
+          No
+        </button>
+      </div>
+
+      <div id="response-message" class="hidden text-white mt-8 text-3xl font-semibold"></div>
+    </div>
+
+  </div>
+
+  <!-- Script principal -->
+  <script src="js/funciones.js"></script>
+
+  <!-- Script para iniciar música y mostrar intro -->
+  <script>
+    document.getElementById("start-btn").addEventListener("click", function () {
+        const bgMusic = document.getElementById("bg-music");
+        bgMusic.volume = 0.6;
+        bgMusic.play().catch(() => {}); // reproducción segura en móviles
+
+        // Ocultar el botón
+        this.style.display = "none";
+
+        // Mostrar el intro
+        document.getElementById("intro-text").classList.remove("opacity-0");
+    });
+  </script>
+
+</body>
+</html>

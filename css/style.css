@@ -1,0 +1,139 @@
+/* css/style.css */
+
+/* Estilos personalizados para el diseño y la animación */
+.full-screen-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    
+    /* Definimos el color de fondo para que el centrado funcione siempre */
+    --background-deep: #0f172a; 
+    background: linear-gradient(135deg, var(--background-deep) 0%, #1e293b 100%);
+}
+
+.step {
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out, transform 0.8s ease;
+    transform: translateY(20px);
+    pointer-events: none; /* Desactivar clics en elementos ocultos */
+}
+
+.step.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto; /* Activar clics cuando está visible */
+}
+
+.question-container {
+    min-width: 300px;
+    max-width: 500px;
+    min-height: 200px;
+}
+
+/* Ocultar el audio de YouTube */
+#youtube-audio {
+    display: none;
+}
+
+/* 🌌 ANIMATED LUXURY BACKGROUND */
+body {
+  background: radial-gradient(circle at 20% 20%, #ff47a3 0%, #0f172a 50%, #1e293b 100%);
+  background-size: 200% 200%;
+  animation: bgMove 12s ease-in-out infinite alternate;
+}
+
+@keyframes bgMove {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+
+/* ✨ GLASS CARD EFFECT */
+.glass-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid rgba(255, 105, 180, 0.25);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 25px rgba(255, 105, 180, 0.25);
+  border-radius: 20px;
+}
+
+
+/* ❤️ FINAL QUESTION EFFECT (letra por letra) */
+#final-question {
+  animation: typewriter 4s steps(40) 1 both, glow 3s ease-in-out infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid #ff7cc8;
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes glow {
+  0% { text-shadow: 0 0 10px #ff67c4; }
+  100% { text-shadow: 0 0 25px #ff9fe0; }
+}
+
+
+/* 💕 FLOATING HEARTS BACKGROUND */
+body::before {
+  content: "❤ ❤ ❤ ❤ ❤";
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: 30px;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.07;
+  animation: heartsFloat 12s linear infinite;
+}
+
+@keyframes heartsFloat {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-200px); }
+}
+
+
+/* 🔘 FINAL BUTTONS — Now glowing and floating */
+#final-buttons button {
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
+  animation: floatY 3s ease-in-out infinite;
+}
+
+@keyframes floatY {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* --- ARREGLO PARA QUE LA PREGUNTA FINAL SE ADAPTE A MÓVILES --- */
+@media (max-width: 480px) {
+
+  #final-question {
+    font-size: 1.8rem !important;   /* equivalente a text-3xl */
+    line-height: 1.2 !important;
+    white-space: normal !important;  /* 🔥 permite que haga salto de línea */
+    border-right: none !important;   /* oculta línea del typewriter en móviles */
+    animation: glow 3s ease-in-out infinite alternate !important;
+  }
+
+  #final-emoji {
+    font-size: 3rem !important;
+  }
+
+  #final-buttons {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  #final-buttons button {
+    width: 100% !important;
+    padding: 14px !important;
+  }
+}
