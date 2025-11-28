@@ -13,18 +13,18 @@ const questionImage = document.querySelector("#question-image img");
 
 let currentQuestion = 0;
 
-// Preguntas y sus imágenes
+// Preguntas y sus imágenes (con correcciones de ortografía)
 const questions = [
     { text: "¿Sientes que podemos construir algo bonito aunque nos estemos conociendo?", img: "images/1.jpeg" },
     { text: "¿Te imaginaste que alguien tan increíble como yo aparecería tan rápido en tu vida?", img: "images/2.jpeg" },
-    { text: "¿Te gusta cómo te trato… o crees que debería esforzarme aún más?", img: "images/3.jpeg" },
-    { text: "¿Admitelo  este detalle lo vas a recordar por siempre 😜!!", img: "images/4.jpeg" },
-    { text: "¿Te gustaría que siga sorprendiéndote o ya hice suficiente?", img: "images/5.jpeg" },
-    { text: "¿Estas difrutando de tu cumple? ¿Obio conmigo aqui como no ?  ", img: "images/6.jpeg" },
-    { text: "¿estaba pensando hacer algo original pero me pase cierto?", img: "images/7.jpeg" },
-    { text: "¿Un tap en claro podria resolver alguno de tus problemas te animas?", img: "images/8.jpeg" },
-    { text: "¿Trata respondiendo no  es la unica vez que sera buena idea 😉", img: "images/9.jpeg" },
-    { text: "¿si ya llegaste aqui que esperas ?", img: "images/10.jpeg" },
+    { text: "¿Te gusta cómo te trato o crees que debería esforzarme aún más?", img: "images/3.jpeg" },
+    { text: "¡Admítelo! Este detalle lo vas a recordar por siempre. 😉", img: "images/4.jpeg" },
+    { text: "¿Te gustaría que siga sorprendiéndote, o ya hice suficiente?", img: "images/5.jpeg" },
+    { text: "¿Estás disfrutando de tu cumple? Obvio, ¿cómo no si estoy yo aquí?", img: "images/6.jpeg" },
+    { text: "¿Estaba pensando hacer algo original, pero me pasé, ¿cierto?", img: "images/7.jpeg" },
+    { text: "¿Un 'tap' en claro podría resolver alguno de tus problemas? ¿Te animas?", img: "images/8.jpeg" },
+    { text: "Trata de responder 'no', es la única vez que será buena idea. 😉", img: "images/9.jpeg" },
+    { text: "Si ya llegaste aquí, ¿qué esperas?", img: "images/10.jpeg" },
 ];
 
 // Respuestas dinámicas
@@ -37,7 +37,7 @@ const yesResponses = [
 ];
 
 const noResponses = [
-    "¿No? dale pa atras que te equivocaste 😎",
+    "¿No? dale pa atrás que te equivocaste 😎",
     "Interesante decisión… incorrecta, pero interesante 😌",
     "Jajaja dale, te dejo esa… por ahora 😏",
     "No pasa nada… todos cometemos errores 😌✨",
@@ -80,7 +80,8 @@ function loadQuestion() {
             questionText.classList.add("opacity-100");
         }, 100);
     } else {
-        showFinalProposal();
+        // En lugar de ir directo a final, mostramos candado
+        showLockStep();
     }
 }
 
@@ -152,72 +153,72 @@ window.onload = startSequence;
 
 
 /* -------------------------
-   BOTÓN NO QUE HUYE (troll)
-   ------------------------- */
+    BOTÓN NO QUE HUYE (troll)
+    ------------------------- */
 
 // Mueve el botón a una posición aleatoria visible
 function moveNoButtonByElement(btn) {
-  if (!btn) return;
-  // dejar un margen para que no quede pegado al borde
-  const margin = 12;
-  const maxX = Math.max(window.innerWidth - btn.offsetWidth - margin, margin);
-  const maxY = Math.max(window.innerHeight - btn.offsetHeight - margin, margin);
+    if (!btn) return;
+    // dejar un margen para que no quede pegado al borde
+    const margin = 12;
+    const maxX = Math.max(window.innerWidth - btn.offsetWidth - margin, margin);
+    const maxY = Math.max(window.innerHeight - btn.offsetHeight - margin, margin);
 
-  const randomX = Math.floor(Math.random() * (maxX - margin)) + margin;
-  const randomY = Math.floor(Math.random() * (maxY - margin)) + margin;
+    const randomX = Math.floor(Math.random() * (maxX - margin)) + margin;
+    const randomY = Math.floor(Math.random() * (maxY - margin)) + margin;
 
-  // usar position:fixed para que funcione en todo el viewport
-  btn.style.position = "fixed";
-  btn.style.left = `${randomX}px`;
-  btn.style.top = `${randomY}px`;
-  btn.style.transition = "left 0.22s ease, top 0.22s ease";
+    // usar position:fixed para que funcione en todo el viewport
+    btn.style.position = "fixed";
+    btn.style.left = `${randomX}px`;
+    btn.style.top = `${randomY}px`;
+    btn.style.transition = "left 0.22s ease, top 0.22s ease";
 }
 
 // Intenta "enganchar" los listeners al botón NO. Solo se añade una vez.
 function attachNoButtonHandlers() {
-  const btn = document.getElementById("btn-no");
-  if (!btn) return false; // aún no existe
-  if (btn.dataset.noListeners) return true; // ya tiene listeners
+    const btn = document.getElementById("btn-no");
+    if (!btn) return false; // aún no existe
+    if (btn.dataset.noListeners) return true; // ya tiene listeners
 
-  // Handler compartido (usa el elemento actual)
-  const handler = (e) => {
-    // si es touch, prevenimos el click inmediato
-    if (e && e.type === "touchstart") e.preventDefault();
-    moveNoButtonByElement(btn);
-  };
+    // Handler compartido (usa el elemento actual)
+    const handler = (e) => {
+        // si es touch, prevenimos el click inmediato
+        if (e && e.type === "touchstart") e.preventDefault();
+        moveNoButtonByElement(btn);
+    };
 
-  // PC: cuando el cursor se acerca
-  btn.addEventListener("mouseover", handler, { passive: true });
+    // PC: cuando el cursor se acerca
+    btn.addEventListener("mouseover", handler, { passive: true });
 
-  // Móvil: cuando tocan (touchstart para respuesta inmediata)
-  btn.addEventListener("touchstart", handler, { passive: false });
+    // Móvil: cuando tocan (touchstart para respuesta inmediata)
+    btn.addEventListener("touchstart", handler, { passive: false });
 
-  // Evitar doble-attach
-  btn.dataset.noListeners = "1";
-  return true;
+    // Evitar doble-attach
+    btn.dataset.noListeners = "1";
+    return true;
 }
 // Asegurar que el botón NO tenga los handlers, incluso si se carga tarde
 (function ensureNoButtonAttached() {
-  // Intentar ahora y volver a intentar unas veces si no existe aún
-  if (attachNoButtonHandlers()) return;
-  let tries = 0;
-  const t = setInterval(() => {
-    tries++;
-    if (attachNoButtonHandlers() || tries > 20) clearInterval(t);
-  }, 200); // intenta cada 200ms hasta 20 veces (4s)
+    // Intentar ahora y volver a intentar unas veces si no existe aún
+    if (attachNoButtonHandlers()) return;
+    let tries = 0;
+    const t = setInterval(() => {
+        tries++;
+        if (attachNoButtonHandlers() || tries > 20) clearInterval(t);
+    }, 200); // intenta cada 200ms hasta 20 veces (4s)
 })();
 
 // Opcional: si la ventana cambia de tamaño, recolocar para que no quede fuera
 window.addEventListener("resize", () => {
-  const btn = document.getElementById("btn-no");
-  if (btn && btn.style.position === "fixed") {
-    // garantizar que sigue dentro
-    const left = parseFloat(btn.style.left) || 0;
-    const top = parseFloat(btn.style.top) || 0;
-    const maxX = Math.max(window.innerWidth - btn.offsetWidth - 12, 12);
-    const maxY = Math.max(window.innerHeight - btn.offsetHeight - 12, 12);
-    if (left > maxX || top > maxY) moveNoButtonByElement(btn);
-  }
+    const btn = document.getElementById("btn-no");
+    if (btn && btn.style.position === "fixed") {
+        // garantizar que sigue dentro
+        const left = parseFloat(btn.style.left) || 0;
+        const top = parseFloat(btn.style.top) || 0;
+        const maxX = Math.max(window.innerWidth - btn.offsetWidth - 12, 12);
+        const maxY = Math.max(window.innerHeight - btn.offsetHeight - 12, 12);
+        if (left > maxX || top > maxY) moveNoButtonByElement(btn);
+    }
 });
 
 let noCounter = 0; // contador de intentos “No”
@@ -263,7 +264,7 @@ lockBtn.addEventListener("click", () => {
     }
 });
 
-// Barra de progreso del amor
+// Barra de progreso del amor (TIEMPO CORREGIDO: 5 segundos)
 function showLoveProgress() {
     loveProgressContainer.classList.remove("hidden");
     loveProgressContainer.classList.add("active", "opacity-100");
@@ -275,13 +276,23 @@ function showLoveProgress() {
         "100% → Sabía que dirías que sí ❤️"
     ];
 
+    // Configuración para 5 segundos de duración
+    const INCREMENTO = 2.5; 
+    const INTERVALO_MS = 125; 
+    
     const interval = setInterval(() => {
-        progress += 10;
-        if (progress > 100) {
+        progress += INCREMENTO;
+        
+        // El progreso no debe exceder 100
+        if (progress >= 100) { 
+            progress = 100;
             clearInterval(interval);
-            loveProgressContainer.classList.add("hidden");
-            showFinalProposal(); // finalmente mostrar pregunta final
-            return;
+            
+            // Retraso para que el usuario vea el 100% antes de continuar
+            setTimeout(() => {
+                 loveProgressContainer.classList.add("hidden");
+                 showFinalProposal();
+            }, 800); 
         }
 
         loveProgressBar.style.width = progress + "%";
@@ -289,26 +300,5 @@ function showLoveProgress() {
         if (progress < 50) loveProgressText.textContent = messages[0];
         else if (progress < 100) loveProgressText.textContent = messages[1];
         else loveProgressText.textContent = messages[2];
-    }, 300);
+    }, INTERVALO_MS);
 }
-
-// Modificar loadQuestion para ir a candado al final
-function loadQuestion() {
-    if (currentQuestion < questions.length) {
-        const q = questions[currentQuestion];
-        questionText.textContent = q.text;
-        currentQIndex.textContent = currentQuestion + 1;
-
-        if (q.img) {
-            questionImage.src = q.img;
-            questionImage.classList.remove("hidden");
-        } else {
-            questionImage.classList.add("hidden");
-        }
-
-    } else {
-        // En lugar de ir directo a final, mostramos candado
-        showLockStep();
-    }
-}
-
